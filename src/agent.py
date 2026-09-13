@@ -6,7 +6,7 @@ import pandas as pd
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+RETRIEVAL_THRESHOLD = 0.30
 
 # ================================================================
 # PATHS
@@ -269,8 +269,8 @@ def retrieve_response(message, intent):
     print(f"[Retrieval similarity: {best_score:.3f}]")
 
     # Use retrieval only for strong matches
-    if best_score < 0.30:
-        return None
+    if best_score < RETRIEVAL_THRESHOLD:
+    return None
 
     # Reject poor-quality responses
     if not is_good_response(best_response):
